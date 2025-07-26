@@ -11,6 +11,19 @@ if __name__ == '__main__':
     print("[INFO] Creating the conda environment for SuGaR...")
     os.system("conda env create -f environment.yml")
     print("[INFO] Conda environment created.")
+
+    # Install cudatoolkit
+    print("[INFO] Installing cudatoolkit...")
+    os.system("conda run -n sugar conda install cuda cudatoolkit=11.8 -c nvidia/label/cuda-11.8.0 -y")
+    print("[INFO] cudatoolkit installed.")
+
+    print(f"[DEBUG] Current TORCH_CUDA_ARCH_LIST: {os.environ.get('TORCH_CUDA_ARCH_LIST')}")
+    os.environ["TORCH_CUDA_ARCH_LIST"] = "8.6"
+    print(f"[INFO] Set TORCH_CUDA_ARCH_LIST to: {os.environ['TORCH_CUDA_ARCH_LIST']}")
+    
+    print("[INFO] Installing gcc_linux-64 and gxx_linux-64 in the 'sugar' conda environment...")
+    os.system("conda run -n sugar conda install -c conda-forge gcc_linux-64 gxx_linux-64 -y")
+    print("[INFO] gcc_linux-64 and gxx_linux-64 installed.")
     
     # Install 3D Gaussian Splatting rasterizer
     print("[INFO] Installing the 3D Gaussian Splatting rasterizer...")

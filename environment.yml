@@ -4,14 +4,10 @@ channels:
   - plotly
   - iopath
   - pytorch
+  - nvidia
   - conda-forge
   - defaults
-  - nvidia/label/cuda-11.8.0
-  - nvidia
 dependencies:
-  - cuda
-  - gcc_linux-64
-  - gxx_linux-64
   - _libgcc_mutex=0.1=main
   - _openmp_mutex=5.1=1_gnu
   - anyio=4.1.0=pyhd8ed1ab_0
@@ -248,3 +244,4 @@ dependencies:
       - threadpoolctl==3.2.0
       - tzdata==2023.3
       - werkzeug==3.0.1
+      - open3d
