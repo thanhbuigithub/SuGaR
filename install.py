@@ -5,6 +5,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Setup the environment')
     
     parser.add_argument('--no_nvdiffrast', action='store_true', help='Skip installation of Nvdiffrast')
+    parser.add_argument('--cuda_arch_list', type=str, default='8.6', help='CUDA architecture list for PyTorch compilation (default: 8.6)')
     args = parser.parse_args()
     
     # Create a new conda environment
@@ -18,7 +19,7 @@ if __name__ == '__main__':
     print("[INFO] cudatoolkit installed.")
 
     print(f"[DEBUG] Current TORCH_CUDA_ARCH_LIST: {os.environ.get('TORCH_CUDA_ARCH_LIST')}")
-    os.environ["TORCH_CUDA_ARCH_LIST"] = "8.6"
+    os.environ["TORCH_CUDA_ARCH_LIST"] = args.cuda_arch_list
     print(f"[INFO] Set TORCH_CUDA_ARCH_LIST to: {os.environ['TORCH_CUDA_ARCH_LIST']}")
     
     print("[INFO] Installing gcc_linux-64 and gxx_linux-64 in the 'sugar' conda environment...")
@@ -50,4 +51,6 @@ if __name__ == '__main__':
         print("[INFO] Please note that Nvdiffrast will take a few seconds or minutes to build the first time it is used.")
         os.chdir("../")
 
+    print("[INFO] Installing libegl1-mesa-dev...")
+    os.system("apt-get install libegl1-mesa-dev -y")
     print("[INFO] SuGaR installation complete.")
