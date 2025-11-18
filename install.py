@@ -38,6 +38,9 @@ if __name__ == '__main__':
     os.system("conda run -n sugar pip install -e .")
     print("[INFO] simple-knn installed.")
     os.chdir("../../../")
+
+    print("[INFO] Installing libegl1-mesa-dev...")
+    os.system("apt-get install -y libegl1-mesa-dev libgles2-mesa-dev libgl1-mesa-dev mesa-common-dev")
     
     # Install Nvdiffrast
     if args.no_nvdiffrast:
@@ -51,6 +54,4 @@ if __name__ == '__main__':
         print("[INFO] Please note that Nvdiffrast will take a few seconds or minutes to build the first time it is used.")
         os.chdir("../")
 
-    print("[INFO] Installing libegl1-mesa-dev...")
-    os.system("apt-get install libegl1-mesa-dev -y")
     print("[INFO] SuGaR installation complete.")
