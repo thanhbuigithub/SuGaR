@@ -7,6 +7,9 @@ if __name__ == '__main__':
     parser.add_argument('--no_nvdiffrast', action='store_true', help='Skip installation of Nvdiffrast')
     parser.add_argument('--cuda_arch_list', type=str, default='8.6', help='CUDA architecture list for PyTorch compilation (default: 8.6)')
     args = parser.parse_args()
+
+    print("[INFO] Installing libegl1-mesa-dev...")
+    os.system("apt update && apt-get install -y libegl1-mesa-dev libgles2-mesa-dev libgl1-mesa-dev mesa-common-dev")
     
     # Create a new conda environment
     print("[INFO] Creating the conda environment for SuGaR...")
@@ -38,9 +41,6 @@ if __name__ == '__main__':
     os.system("conda run -n sugar pip install -e .")
     print("[INFO] simple-knn installed.")
     os.chdir("../../../")
-
-    print("[INFO] Installing libegl1-mesa-dev...")
-    os.system("apt-get install -y libegl1-mesa-dev libgles2-mesa-dev libgl1-mesa-dev mesa-common-dev")
     
     # Install Nvdiffrast
     if args.no_nvdiffrast:
